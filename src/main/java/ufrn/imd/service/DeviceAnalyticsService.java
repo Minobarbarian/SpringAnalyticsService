@@ -8,6 +8,10 @@ import ufrn.imd.model.DeviceStatus;
 
 import org.springframework.stereotype.Service;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @Service
 public class DeviceAnalyticsService {
 	private final DeviceStatusServiceClient deviceStatusServiceClient;
@@ -16,8 +20,7 @@ public class DeviceAnalyticsService {
 		this.deviceStatusServiceClient = deviceStatusServiceClient;
 	}
 	
-	
-	private List<DeviceStatus> fetchAllDeviceStatuses() {
+	public List<DeviceStatus> fetchAllDeviceStatuses() {
         return deviceStatusServiceClient.getAllDeviceStatuses();
     }
 	
@@ -39,7 +42,6 @@ public class DeviceAnalyticsService {
 
         return calculateMedian(thermostatValues);
     }
-	
 	public long getDevicesWithLightOff() {
         return fetchAllDeviceStatuses().stream()
                 .filter(device -> !device.isLightStatus())
