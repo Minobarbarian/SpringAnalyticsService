@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import ufrn.imd.model.DeviceStatus;
 
-@FeignClient(name = "device-status-service")
+@FeignClient(name = "SPRING-DATABASE-SERVICE")
 public interface DeviceStatusServiceClient {
 	@PostMapping("/device-status/devices")
 	DeviceStatus createDevice(@RequestBody DeviceStatus device);
