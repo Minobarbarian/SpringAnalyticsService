@@ -16,6 +16,7 @@ public class DeviceAnalyticsService {
 		this.deviceStatusServiceClient = deviceStatusServiceClient;
 	}
 	
+	
 	private List<DeviceStatus> fetchAllDeviceStatuses() {
         return deviceStatusServiceClient.getAllDeviceStatuses();
     }
